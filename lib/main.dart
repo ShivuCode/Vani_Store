@@ -52,59 +52,60 @@ class _HomePageState extends State<HomePage> {
       length: 5,
       child: Scaffold(
         extendBodyBehindAppBar: true,
-        appBar: AppBar(
-          backgroundColor: theme,
-          elevation: 0,
-          title: Text("Vani Store",
-              style: TextStyle(
-                  fontSize: 26, fontWeight: FontWeight.bold, color: txtColor)),
-          titleSpacing: 30,
-          actions: [
-            SizedBox(
-              width: 500,
-              child: Scaffold(
-                extendBodyBehindAppBar: true,
-                appBar: AppBar(
-                    backgroundColor: theme,
-                    elevation: 0,
-                    bottom: TabBar(
-                      indicatorColor: theme,
-                      isScrollable: false,
-                      padding: EdgeInsets.only(bottom: 5.0),
-                      overlayColor: MaterialStateProperty.all<Color>(theme),
-                      tabs: [
-                        Tab(
-                            child: Text("Home",
-                                style:
-                                    TextStyle(fontSize: 16, color: txtColor))),
-                        Tab(
-                            child: Text("Products",
-                                style:
-                                    TextStyle(fontSize: 16, color: txtColor))),
-                        Tab(
-                            child: Text("Blog",
-                                style:
-                                    TextStyle(fontSize: 16, color: txtColor))),
-                        Tab(
-                            child: Text("About us",
-                                style:
-                                    TextStyle(fontSize: 16, color: txtColor))),
-                        Tab(
-                            child: Text("Theme",
-                                style:
-                                    TextStyle(fontSize: 16, color: txtColor)))
-                      ],
-                    )),
-              ),
-            ),
-          ],
-        ),
+        appBar: PreferredSize(
+            preferredSize: const Size(double.infinity, 70),
+            child: Container(
+              color: theme,
+              padding: const EdgeInsets.all(5.0),
+              child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text("Vani Store",
+                        style: TextStyle(
+                            fontSize: 26,
+                            fontWeight: FontWeight.bold,
+                            color: txtColor)),
+                    SizedBox(
+                      width: 500,
+                      child: TabBar(
+                        indicatorColor: theme,
+                        isScrollable: false,
+                        padding: const EdgeInsets.only(bottom: 5.0),
+                        overlayColor: MaterialStateProperty.all<Color>(theme),
+                        tabs: [
+                          Tab(
+                              child: Text("Home",
+                                  style: TextStyle(
+                                      fontSize: 16, color: txtColor))),
+                          Tab(
+                              child: Text("Products",
+                                  style: TextStyle(
+                                      fontSize: 16, color: txtColor))),
+                          Tab(
+                              child: Text("Blog",
+                                  style: TextStyle(
+                                      fontSize: 16, color: txtColor))),
+                          Tab(
+                              child: Text("About us",
+                                  style: TextStyle(
+                                      fontSize: 16, color: txtColor))),
+                          Tab(
+                              child: Text("Theme",
+                                  style:
+                                      TextStyle(fontSize: 16, color: txtColor)))
+                        ],
+                      ),
+                    ),
+                  ]),
+            )),
         body: TabBarView(
           children: [
             Container(
               decoration: BoxDecoration(
                 image: DecorationImage(
-                    image: AssetImage("s1.jpg"), fit: BoxFit.cover),
+                    onError: (exception, stackTrace) {},
+                    image: const AssetImage("h.jpg"),
+                    fit: BoxFit.cover),
               ),
               child: Padding(
                 padding: const EdgeInsets.only(left: 100),
@@ -126,18 +127,23 @@ class _HomePageState extends State<HomePage> {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        FlatButton(
+                        ElevatedButton(
+                            style: ButtonStyle(
+                                backgroundColor: MaterialStateProperty.all(
+                                    theme.withOpacity(1)),
+                                minimumSize: MaterialStateProperty.all(
+                                    const Size(150, 45))),
                             onPressed: () {
                               showDialog(
                                   context: context,
                                   builder: (BuildContext context) {
                                     return AlertDialog(
                                       title: Container(
-                                        padding: EdgeInsets.all(20),
+                                        padding: const EdgeInsets.all(20),
                                         width: 400,
                                         height: 400,
                                         child: Column(
-                                           mainAxisAlignment:
+                                          mainAxisAlignment:
                                               MainAxisAlignment.center,
                                           children: [
                                             const Text("Login or SignUp",
@@ -184,32 +190,36 @@ class _HomePageState extends State<HomePage> {
                                                       color: Colors.grey)),
                                             ),
                                             addVerticalSpace(20),
-                                            FlatButton(
+                                            ElevatedButton(
                                                 onPressed: () {
                                                   Navigator.of(context).pop();
                                                 },
-                                                height: 50,
-                                                minWidth: 200,
-                                                textColor: Colors.black,
-                                                shape: const StadiumBorder(
-                                                    side: BorderSide(
-                                                        color: Colors.blueGrey)),
+                                                style: ButtonStyle(
+                                                  backgroundColor:
+                                                      MaterialStateProperty.all(
+                                                          Colors.black),
+                                                  minimumSize:
+                                                      MaterialStateProperty.all(
+                                                          Size(200, 50)),
+                                                ),
                                                 child: const Text("Login",
                                                     style: TextStyle(
                                                         fontSize: 16,
                                                         fontWeight:
                                                             FontWeight.bold))),
                                             addVerticalSpace(20),
-                                            FlatButton(
+                                            ElevatedButton(
                                                 onPressed: () {
                                                   Navigator.of(context).pop();
                                                 },
-                                                minWidth: 200,
-                                                height: 50,
-                                                textColor: Colors.black38,
-                                                shape: const StadiumBorder(
-                                                    side: BorderSide(
-                                                        color: Colors.blueGrey)),
+                                                style: ButtonStyle(
+                                                  backgroundColor:
+                                                      MaterialStateProperty.all(
+                                                          Colors.black),
+                                                  minimumSize:
+                                                      MaterialStateProperty.all(
+                                                          const Size(200, 50)),
+                                                ),
                                                 child: const Text("Skip",
                                                     style: TextStyle(
                                                         fontWeight:
@@ -220,17 +230,15 @@ class _HomePageState extends State<HomePage> {
                                     );
                                   });
                             },
-                            textColor: theme,
-                            shape: Border.all(color: theme),
-                            minWidth: 200,
-                            height: 45,
-                            child: Text("SHOP NOW")),
+                            child: const Text("SHOP NOW")),
                         addHorizontalSpace(20),
-                        FlatButton(
+                        ElevatedButton(
+                            style: ButtonStyle(
+                                backgroundColor:
+                                    MaterialStateProperty.all(theme),
+                                minimumSize: MaterialStateProperty.all(
+                                    const Size(200, 45))),
                             onPressed: () {},
-                            color: theme,
-                            minWidth: 200,
-                            height: 45,
                             child: Text("CLUB MEMBERSHIP",
                                 style: TextStyle(color: txtColor)))
                       ],
@@ -249,7 +257,7 @@ class _HomePageState extends State<HomePage> {
               child: ListView(
                 children: [
                   ListTile(
-                    contentPadding: EdgeInsets.only(top: 10),
+                    contentPadding: const EdgeInsets.only(top: 10),
                     subtitle: Column(
                       children: [
                         Text("BEST COLLECTION",
@@ -269,17 +277,17 @@ class _HomePageState extends State<HomePage> {
                       ],
                     ),
                   ),
-                  ListTile(
+                  const ListTile(
                     contentPadding: EdgeInsets.all(20),
                     title: Row(
-                      children: const [
+                      children: [
                         Text("Sort By: "),
                       ],
                     ),
                   ),
                   ListTile(
                       title: Container(
-                        margin: EdgeInsets.all(10),
+                        margin: const EdgeInsets.all(10),
                         child: SingleChildScrollView(
                           scrollDirection: Axis.horizontal,
                           child: Row(
@@ -301,7 +309,7 @@ class _HomePageState extends State<HomePage> {
                         ),
                       ),
                       subtitle: Container(
-                        margin: EdgeInsets.all(10),
+                        margin: const EdgeInsets.all(10),
                         child: SingleChildScrollView(
                           scrollDirection: Axis.horizontal,
                           child: Row(
@@ -326,236 +334,241 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
             Container(
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                    begin: Alignment.topCenter,
-                    end: Alignment.bottomCenter,
-                    colors: [theme.withOpacity(0.4), theme.withOpacity(0.2)]),
-              ),
+              color: theme.withOpacity(0.5),
               child: Container(
                   height: MediaQuery.of(context).size.height,
                   width: 600,
                   margin: const EdgeInsets.only(top: 200),
-                  padding: EdgeInsets.only(left: 100, right: 100, bottom: 50),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
                   decoration: const BoxDecoration(
                     gradient: LinearGradient(
                         begin: Alignment.topCenter,
                         end: Alignment.bottomCenter,
                         colors: [Colors.white, Colors.white]),
                   ),
-                  child: ListView(
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [blogCard(), blogCard(), blogCard()],
+                  child: SingleChildScrollView(
+                    child: Center(
+                      child: Wrap(
+                        spacing: 20,
+                        runSpacing: 5,
+                        children: [
+                          blogCard(),
+                          blogCard(),
+                          blogCard(),
+                          blogCard(),
+                          blogCard(),
+                          blogCard(),
+                          blogCard(),
+                          blogCard(),
+                          blogCard(),
+                          blogCard(),
+                          blogCard(),
+                          blogCard()
+                        ],
                       ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [blogCard(), blogCard(), blogCard()],
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [blogCard(), blogCard(), blogCard()],
-                      ),
-                    ],
+                    ),
                   )),
             ),
-            Container(
-              child: Stack(
-                children: [
-                  Scaffold(
-                    backgroundColor: theme.withOpacity(0.3),
-                    body: Container(
-                      margin: EdgeInsets.only(left: 230),
-                      padding: EdgeInsets.only(top: 100, left: 320, right: 50),
-                      height: MediaQuery.of(context).size.height,
-                      decoration: const BoxDecoration(
-                          gradient: LinearGradient(
-                              begin: Alignment.topCenter,
-                              end: Alignment.topCenter,
-                              colors: [Colors.white, Colors.white])),
-                      child: Stack(children: [
-                        Column(
-                          children: [
-                            Row(
-                              children: [
-                                Container(
-                                  decoration: BoxDecoration(
-                                      gradient: LinearGradient(
-                                          begin: Alignment.topCenter,
-                                          end: Alignment.topCenter,
-                                          colors: [
-                                        theme.withOpacity(0.3),
-                                        theme.withOpacity(0.3)
-                                      ])),
-                                  padding: EdgeInsets.all(20),
-                                  child: Column(
-                                    children: [
-                                      Icon(Icons.stacked_bar_chart_sharp,
-                                          size: 80, color: Colors.grey),
-                                      addVerticalSpace(10),
-                                      Text("EXCELLENCE",
-                                          style: TextStyle(fontSize: 20)),
-                                      addVerticalSpace(10),
-                                      Text("Some fifty years ago there was a",
-                                          style: TextStyle(fontSize: 12)),
-                                      Text(" curious case of whale-trover ",
-                                          style: TextStyle(fontSize: 12)),
-                                      Text(
-                                        "litigated in England",
-                                        style: TextStyle(fontSize: 12),
-                                      )
-                                    ],
-                                  ),
+            Stack(
+              children: [
+                Scaffold(
+                  backgroundColor: theme.withOpacity(0.3),
+                  body: Container(
+                    margin: const EdgeInsets.only(left: 230),
+                    padding:
+                        const EdgeInsets.only(top: 100, left: 320, right: 50),
+                    height: MediaQuery.of(context).size.height,
+                    decoration: const BoxDecoration(
+                        gradient: LinearGradient(
+                            begin: Alignment.topCenter,
+                            end: Alignment.topCenter,
+                            colors: [Colors.white, Colors.white])),
+                    child: Stack(children: [
+                      Column(
+                        children: [
+                          Row(
+                            children: [
+                              Container(
+                                decoration: BoxDecoration(
+                                    gradient: LinearGradient(
+                                        begin: Alignment.topCenter,
+                                        end: Alignment.topCenter,
+                                        colors: [
+                                      theme.withOpacity(0.3),
+                                      theme.withOpacity(0.3)
+                                    ])),
+                                padding: const EdgeInsets.all(20),
+                                child: Column(
+                                  children: [
+                                    const Icon(Icons.stacked_bar_chart_sharp,
+                                        size: 80, color: Colors.grey),
+                                    addVerticalSpace(10),
+                                    const Text("EXCELLENCE",
+                                        style: TextStyle(fontSize: 20)),
+                                    addVerticalSpace(10),
+                                    const Text(
+                                        "Some fifty years ago there was a",
+                                        style: TextStyle(fontSize: 12)),
+                                    const Text(" curious case of whale-trover ",
+                                        style: TextStyle(fontSize: 12)),
+                                    const Text(
+                                      "litigated in England",
+                                      style: TextStyle(fontSize: 12),
+                                    )
+                                  ],
                                 ),
-                                addHorizontalSpace(60),
-                                Container(
-                                  decoration: BoxDecoration(
-                                      gradient: LinearGradient(
-                                          begin: Alignment.topCenter,
-                                          end: Alignment.topCenter,
-                                          colors: [
-                                        theme.withOpacity(0.3),
-                                        theme.withOpacity(0.3)
-                                      ])),
-                                  padding: EdgeInsets.all(20),
-                                  child: Column(
-                                    children: [
-                                      Icon(Icons.people_alt_sharp,
-                                          size: 80, color: Colors.grey),
-                                      addVerticalSpace(10),
-                                      Text("EXCELLENCE",
-                                          style: TextStyle(fontSize: 20)),
-                                      addVerticalSpace(10),
-                                      Text("Some fifty years ago there was a",
-                                          style: TextStyle(fontSize: 12)),
-                                      Text(" curious case of whale-trover ",
-                                          style: TextStyle(fontSize: 12)),
-                                      Text(
-                                        "litigated in England",
-                                        style: TextStyle(fontSize: 12),
-                                      )
-                                    ],
-                                  ),
+                              ),
+                              addHorizontalSpace(60),
+                              Container(
+                                decoration: BoxDecoration(
+                                    gradient: LinearGradient(
+                                        begin: Alignment.topCenter,
+                                        end: Alignment.topCenter,
+                                        colors: [
+                                      theme.withOpacity(0.3),
+                                      theme.withOpacity(0.3)
+                                    ])),
+                                padding: EdgeInsets.all(20),
+                                child: Column(
+                                  children: [
+                                    const Icon(Icons.people_alt_sharp,
+                                        size: 80, color: Colors.grey),
+                                    addVerticalSpace(10),
+                                    const Text("EXCELLENCE",
+                                        style: TextStyle(fontSize: 20)),
+                                    addVerticalSpace(10),
+                                    const Text(
+                                        "Some fifty years ago there was a",
+                                        style: TextStyle(fontSize: 12)),
+                                    const Text(" curious case of whale-trover ",
+                                        style: TextStyle(fontSize: 12)),
+                                    const Text(
+                                      "litigated in England",
+                                      style: TextStyle(fontSize: 12),
+                                    )
+                                  ],
                                 ),
-                              ],
-                            ),
-                            addVerticalSpace(60),
-                            Row(
-                              children: [
-                                Container(
-                                  decoration: BoxDecoration(
-                                      gradient: LinearGradient(
-                                          begin: Alignment.topCenter,
-                                          end: Alignment.topCenter,
-                                          colors: [
-                                        theme.withOpacity(0.3),
-                                        theme.withOpacity(0.3)
-                                      ])),
-                                  padding: EdgeInsets.all(20),
-                                  child: Column(
-                                    children: [
-                                      Icon(Icons.bookmarks_outlined,
-                                          size: 80, color: Colors.grey),
-                                      addVerticalSpace(10),
-                                      Text("EXCELLENCE",
-                                          style: TextStyle(fontSize: 20)),
-                                      addVerticalSpace(10),
-                                      Text("Some fifty years ago there was a",
-                                          style: TextStyle(fontSize: 12)),
-                                      Text(" curious case of whale-trover ",
-                                          style: TextStyle(fontSize: 12)),
-                                      Text(
-                                        "litigated in England",
-                                        style: TextStyle(fontSize: 12),
-                                      )
-                                    ],
-                                  ),
+                              ),
+                            ],
+                          ),
+                          addVerticalSpace(60),
+                          Row(
+                            children: [
+                              Container(
+                                decoration: BoxDecoration(
+                                    gradient: LinearGradient(
+                                        begin: Alignment.topCenter,
+                                        end: Alignment.topCenter,
+                                        colors: [
+                                      theme.withOpacity(0.3),
+                                      theme.withOpacity(0.3)
+                                    ])),
+                                padding: const EdgeInsets.all(20),
+                                child: Column(
+                                  children: [
+                                    const Icon(Icons.bookmarks_outlined,
+                                        size: 80, color: Colors.grey),
+                                    addVerticalSpace(10),
+                                    const Text("EXCELLENCE",
+                                        style: TextStyle(fontSize: 20)),
+                                    addVerticalSpace(10),
+                                    const Text(
+                                        "Some fifty years ago there was a",
+                                        style: TextStyle(fontSize: 12)),
+                                    const Text(" curious case of whale-trover ",
+                                        style: TextStyle(fontSize: 12)),
+                                    const Text(
+                                      "litigated in England",
+                                      style: TextStyle(fontSize: 12),
+                                    )
+                                  ],
                                 ),
-                                addHorizontalSpace(60),
-                                Container(
-                                  decoration: BoxDecoration(
-                                      gradient: LinearGradient(
-                                          begin: Alignment.topCenter,
-                                          end: Alignment.topCenter,
-                                          colors: [
-                                        theme.withOpacity(0.3),
-                                        theme.withOpacity(0.3)
-                                      ])),
-                                  padding: EdgeInsets.all(20),
-                                  child: Column(
-                                    children: [
-                                      Icon(Icons.compost,
-                                          size: 80, color: Colors.grey),
-                                      addVerticalSpace(10),
-                                      Text("EXCELLENCE",
-                                          style: TextStyle(fontSize: 20)),
-                                      addVerticalSpace(10),
-                                      Text("Some fifty years ago there was a",
-                                          style: TextStyle(fontSize: 12)),
-                                      Text(" curious case of whale-trover ",
-                                          style: TextStyle(fontSize: 12)),
-                                      Text(
-                                        "litigated in England",
-                                        style: TextStyle(fontSize: 12),
-                                      )
-                                    ],
-                                  ),
+                              ),
+                              addHorizontalSpace(60),
+                              Container(
+                                decoration: BoxDecoration(
+                                    gradient: LinearGradient(
+                                        begin: Alignment.topCenter,
+                                        end: Alignment.topCenter,
+                                        colors: [
+                                      theme.withOpacity(0.3),
+                                      theme.withOpacity(0.3)
+                                    ])),
+                                padding: const EdgeInsets.all(20),
+                                child: Column(
+                                  children: [
+                                    const Icon(Icons.compost,
+                                        size: 80, color: Colors.grey),
+                                    addVerticalSpace(10),
+                                    const Text("EXCELLENCE",
+                                        style: TextStyle(fontSize: 20)),
+                                    addVerticalSpace(10),
+                                    const Text(
+                                        "Some fifty years ago there was a",
+                                        style: TextStyle(fontSize: 12)),
+                                    const Text(" curious case of whale-trover ",
+                                        style: TextStyle(fontSize: 12)),
+                                    const Text(
+                                      "litigated in England",
+                                      style: TextStyle(fontSize: 12),
+                                    )
+                                  ],
                                 ),
-                              ],
-                            ),
-                          ],
-                        ),
-                      ]),
-                    ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ]),
                   ),
-                  Container(
-                    margin: EdgeInsets.only(top: 120, left: 60),
-                    width: 400,
-                    height: 400,
-                    decoration: BoxDecoration(
-                        border: Border.all(color: Colors.white, width: 5)),
-                    child: Stack(
-                      children: [
-                        Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Container(
-                                width: 170,
-                                height: 400,
-                                decoration: BoxDecoration(
-                                  gradient: LinearGradient(
-                                      begin: Alignment.topCenter,
-                                      end: Alignment.bottomCenter,
-                                      colors: [theme, theme]),
-                                )),
-                            Container(
-                                width: 180,
-                                height: 400,
-                                decoration: BoxDecoration(
-                                    image: DecorationImage(
-                                        image: AssetImage('p8.png'),
-                                        fit: BoxFit.cover,
-                                        opacity: 0.4)))
-                          ],
-                        ),
-                        Container(
-                          padding: EdgeInsets.all(30),
-                          child: Center(
-                              child: Text("About Us",
-                                  style: TextStyle(
-                                      fontSize: 100,
-                                      fontWeight: FontWeight.bold,
-                                      color: txtColor))),
-                        )
-                      ],
-                    ),
-                  )
-                ],
-              ),
+                ),
+                Container(
+                  margin: const EdgeInsets.only(top: 120, left: 60),
+                  width: 400,
+                  height: 400,
+                  decoration: BoxDecoration(
+                      border: Border.all(color: Colors.white, width: 5)),
+                  child: Stack(
+                    children: [
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Container(
+                              width: 170,
+                              height: 400,
+                              decoration: BoxDecoration(
+                                gradient: LinearGradient(
+                                    begin: Alignment.topCenter,
+                                    end: Alignment.bottomCenter,
+                                    colors: [theme, theme]),
+                              )),
+                          Container(
+                              width: 180,
+                              height: 400,
+                              decoration: const BoxDecoration(
+                                  image: DecorationImage(
+                                      image: AssetImage('p8.png'),
+                                      fit: BoxFit.cover,
+                                      opacity: 0.4)))
+                        ],
+                      ),
+                      Container(
+                        padding: const EdgeInsets.all(30),
+                        child: Center(
+                            child: Text("About Us",
+                                style: TextStyle(
+                                    fontSize: 100,
+                                    fontWeight: FontWeight.bold,
+                                    color: txtColor))),
+                      )
+                    ],
+                  ),
+                )
+              ],
             ),
             Container(
-              padding: EdgeInsets.all(50),
+              padding: const EdgeInsets.all(50),
               decoration: BoxDecoration(
                 gradient: LinearGradient(
                     begin: Alignment.topCenter,
@@ -564,10 +577,10 @@ class _HomePageState extends State<HomePage> {
               ),
               child: ListView(
                 children: [
-                  Text("Default Theme Colors",
+                  const Text("Default Theme Colors",
                       style: TextStyle(fontSize: 26, color: Colors.black)),
                   Container(
-                    margin: EdgeInsets.all(10),
+                    margin: const EdgeInsets.all(10),
                     height: 100,
                     child: ListView.builder(
                         scrollDirection: Axis.horizontal,
@@ -582,10 +595,10 @@ class _HomePageState extends State<HomePage> {
                                   size: 100));
                         }),
                   ),
-                  Text("New Theme Colors",
+                  const Text("New Theme Colors",
                       style: TextStyle(fontSize: 26, color: Colors.black)),
                   Container(
-                    margin: EdgeInsets.all(10),
+                    margin: const EdgeInsets.all(10),
                     height: 100,
                     child: ListView.builder(
                         scrollDirection: Axis.horizontal,
@@ -600,7 +613,7 @@ class _HomePageState extends State<HomePage> {
                                   size: 100));
                         }),
                   ),
-                  Text("Add Theme Colors",
+                  const Text("Add Theme Colors",
                       style: TextStyle(fontSize: 26, color: Colors.black)),
                   addVerticalSpace(20),
                   ListTile(
@@ -613,7 +626,7 @@ class _HomePageState extends State<HomePage> {
                                   context: context,
                                   builder: (BuildContext context) {
                                     return AlertDialog(
-                                      title: Text('Pick a color!'),
+                                      title: const Text('Pick a color!'),
                                       content: SingleChildScrollView(
                                         child: MultipleChoiceBlockPicker(
                                           pickerColors:
@@ -636,11 +649,11 @@ class _HomePageState extends State<HomePage> {
                                     );
                                   });
                             },
-                            child: Icon(Icons.add_circle,
+                            child: const Icon(Icons.add_circle,
                                 size: 100, color: Colors.black)),
                       ],
                     ),
-                    contentPadding: EdgeInsets.only(left: 20),
+                    contentPadding: const EdgeInsets.only(left: 20),
                   )
                 ],
               ),
